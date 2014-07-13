@@ -1,19 +1,19 @@
 REST-tutorial
 =============
 
-Files for my REST API tutorials featuring a server written in Python and a web client written in Javascript. Here are the articles:
+Copyright: [miguelgrinberg](https://github.com/miguelgrinberg/REST-tutorial)
 
-- [Designing a RESTful API with Python and Flask](http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
-- [Writing a Javascript REST client](http://blog.miguelgrinberg.com/post/writing-a-javascript-rest-client)
-- [Designing a RESTful API using Flask-RESTful](http://blog.miguelgrinberg.com/post/designing-a-restful-api-using-flask-restful)
+Notices: Assume you have installed python, git and mongodb
 
 Setup
 -----
 
-- Install Python 2.7, git and (optionally) MongoDB.
-- Run `setup.sh` (Linux, OS X, Cygwin) or `setup.bat` (Windows)
-- Run `./rest-server.py` to start the server (on Windows use `flask\Scripts\python rest-server.py` instead)
-- Alternatively, run `./rest-server-v2.py` to start the Flask-RESTful version of the server.
-- Alternatively, run `./rest-server-v2-mongo.py` to start the Flask-RESTful + MongoDB version of the server. Please note that you need to run MongoDB before running this example. 
-- Open `http://localhost:5000/index.html` on your web browser to run the client
+1. virtualenv an enviroment
+    * ```virtualenv flask```
+    * ```cd flask```
+    * ```source bin/activate```
+    * ```git clone git@github.com:kmlg/REST-tutorial.git```
+    * ```pip install requirements.txt```
+    * ```python apis.py```
+2. Open `http://localhost:5000` on your web browser to run the client
 

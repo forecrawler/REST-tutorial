@@ -17,6 +17,8 @@ auth = HTTPBasicAuth()
 app.config['MONGODB_DB'] = 'tasks'
 app.config['MONGODB_HOST'] = 'localhost'
 app.config['MONGODB_PORT'] = 27017
+#replcase with your own secretkey
+#os.urandom(24)
 app.config['SECRET_KEY'] = '\xfb\xf7\x00T'
 
 #create database connection object
@@ -49,22 +51,6 @@ def not_found(error):
 def not_found(error):
     return make_response(jsonify({'error':'Not Found'}), 404)
 
-"""
-tasks = [
-        {
-            'id':1,
-            'title':u'Buy groceries',
-            'description':u'Milk, Cheese, Pizza, Fruit, Tylenol',
-            'done':False},
-        {
-            'id':2,
-            'title':u'Learn Python',
-            'description':u'Need to find a good Python tutorial on the web.',
-            'done':False
-            }
-        ]
-"""
-
 def get_all_tasks():
     tasks = []
     all_tasks = Task.objects.all()
@@ -88,13 +74,13 @@ def index(**kwargs):
     return make_response(open('templates/index.html').read())
 
 @app.route('/tasks', methods=['GET'])
-@auth.login_required
+#@auth.login_required
 def get_tasks():
     return jsonify({'tasks':map(make_public_task, get_all_tasks())})
     #return jsonify({'tasks':tasks})
 
 @app.route('/tasks/<string:task_id>', methods=['GET'])
-@auth.login_required
+#@auth.login_required
 def get_task(task_id):
     task = filter(lambda t:t['id'] == task_id, get_all_tasks())
     if len(task) == 0:
@@ -102,7 +88,7 @@ def get_task(task_id):
     return jsonify({'task':make_public_task(task[0])})
 
 @app.route('/tasks', methods=['POST'])
-@auth.login_required
+#@auth.login_required
 def create_task():
     if not request.json or not 'title' in request.json:
         abort(400)
@@ -114,7 +100,7 @@ def create_task():
     return jsonify({'task': make_public_task(task)}), 201
 
 @app.route('/tasks/<string:task_id>', methods=['PUT'])
-@auth.login_required
+#@auth.login_required
 def update_task(task_id):
     task = filter(lambda t: t['id'] == task_id, get_all_tasks())
     if len(task) == 0:
@@ -130,10 +116,6 @@ def update_task(task_id):
     if 'done' in request.json and \
             type(request.json['done']) is not bool:
         abort(400)
-    #task[0]['title'] = request.json.get('title', task[0]['title'])
-    #task[0]['description'] = \
-    #        request.json.get('description', task[0]['description'])
-    #task[0]['done'] = request.json.get('done', task[0]['done'])
     title = request.json.get('title', task[0]['title'])
     description = request.json.get('description', task[0]['description'])
     done = request.json.get('done',task[0]['done'])
@@ -142,7 +124,7 @@ def update_task(task_id):
     return jsonify({'task': make_public_task(task[0])})
 
 @app.route('/tasks/<string:task_id>', methods=['DELETE'])
-@auth.login_required
+#@auth.login_required
 def delete_task(task_id):
     task = filter(lambda t:t['id'] == task_id, get_all_tasks())
     if len(task) == 0:

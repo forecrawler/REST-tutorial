@@ -1,4 +1,2 @@
-flask==0.10
-flask-restful==0.2.3
-Flask-HTTPAuth==1.0.0
-pymongo==2.6.3
+Flask==0.10.1
+flask-mongoengine==0.7.0
